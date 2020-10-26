@@ -28,5 +28,5 @@ jobs:
       with:
         app-name: 'covid-statistics-rest-api'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6c2a6b1881b3423183a06be218e64862 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_820806b5eeb244b7a0f03b79c7f306e7 }}
         package: '${{ github.workspace }}/target/*.jar'
