@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy WAR app to Azure Web App - covid-statistics-rest-api
+name: Build and deploy JAR app to Azure Web App - covid-statistics-rest-api
 
 on:
   push:
@@ -28,5 +28,5 @@ jobs:
       with:
         app-name: 'covid-statistics-rest-api'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_fefaba61b60e4cd5a0a7bc2fbd02d6a7 }}
-        package: '${{ github.workspace }}/target/*.war'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f4aaa59463024b1e83ec1cb4ac9184b5 }}
+        package: '${{ github.workspace }}/target/*.jar'
