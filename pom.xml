@@ -51,9 +51,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.1.RELEASE</version>
-                <configuration>
-                    <mainClass>gr.daniil.covidstatistics.CovidStatisticsApplication</mainClass>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
