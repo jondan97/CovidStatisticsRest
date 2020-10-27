@@ -24,8 +24,8 @@ public class Reader {
         CovidReportDTO covidReportDTO = new CovidReportDTO();
         covidReportDTO.setNumberOfRecordsForGreece(calculateNumberOfRecordsForGreece(covidStatisticsList));
         covidReportDTO.setMaxConfirmedWorld(calculateMaxConfirmed(covidStatisticsList));
-        Map<String, Optional<CovidStatistics>> map = calculateMaxDeathsPerCountry(covidStatisticsList);
-        covidReportDTO.setMaxDeathsPerCountry(map);
+        Map<String, Optional<CovidStatistics>> map = groupByMaxDeaths(covidStatisticsList);
+        covidReportDTO.setMaxDeathsPerCountry(calculateMaxDeathsPerCountry(map));
         covidReportDTO.setAverageDeathsWorld(calculateAverageDeaths(map));
         return covidReportDTO;
     }
@@ -74,11 +74,19 @@ public class Reader {
                 .count();
     }
 
-    private Map<String, Optional<CovidStatistics>> calculateMaxDeathsPerCountry(List<CovidStatistics> covidStatisticsList) {
+    private Map<String, Optional<CovidStatistics>> groupByMaxDeaths(List<CovidStatistics> covidStatisticsList) {
         return covidStatisticsList
                 .stream()
                 .collect(Collectors.groupingBy(covidStatistics -> covidStatistics.getCountry(),
-                        Collectors.maxBy(Comparator.comparing(c -> c.getConfirmed()))));
+                        Collectors.maxBy(Comparator.comparing(c -> c.getDeaths()))));
+    }
+
+    private Map<String, Integer> calculateMaxDeathsPerCountry(Map<String, Optional<CovidStatistics>> groupedByMaxDeathsMap) {
+        return groupedByMaxDeathsMap
+                .entrySet()
+                .stream()
+                .collect(Collectors
+                        .toMap(e -> e.getKey(), e -> e.getValue().get().getDeaths()));
     }
 
     private double calculateAverageDeaths(Map<String, Optional<CovidStatistics>> maxConfirmedPerCountry) {
