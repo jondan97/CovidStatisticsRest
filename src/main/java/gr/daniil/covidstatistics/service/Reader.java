@@ -47,12 +47,16 @@ public class Reader {
 
                 //Deal with that one line
 
+                try {
+                    covidStatisticsArrayList.add(new CovidStatistics(elements[0],
+                            elements[1],
+                            parseInt(elements[2]),
+                            parseInt(elements[3]),
+                            parseInt(elements[4])));
 
-                covidStatisticsArrayList.add(new CovidStatistics(elements[0],
-                        elements[1],
-                        parseInt(elements[2]),
-                        parseInt(elements[3]),
-                        parseInt(elements[4])));
+                } catch (Exception e) {
+                    System.out.println("A record was skipped for being invalid.");
+                }
 
                 //Get next line
                 line = br.readLine();
