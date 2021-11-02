@@ -37,7 +37,7 @@ public class RestApiController {
     public void addVisitor(@PathVariable String name,
                            HttpServletResponse response) throws IOException {
         visitorService.saveVisitor(new Visitor(name));
-        response.sendRedirect("/view");
+        response.sendRedirect("/covidStatisticsRest/view");
     }
 
     @GetMapping("/view")
